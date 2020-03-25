@@ -20,6 +20,21 @@ const render = require("./lib/htmlRenderer");
         {type: "input", name: "email", meassage: "Please enter the Employee's E-Mail."},
         {type: "list", name: "role", message: "What role does the Employee have?", choices: ["Engineer", "Manager", "Intern"]}
     ]);
+    if ("Manager") {
+        inquirer.prompt([
+            {type: "input", name: "officeNumber", message: "What is their Office Number?"}
+        ]);
+    }
+    else if ("Engineer") {
+        inquirer.prompt([
+            {type: "input", name: "gitHubUsername", message: "What is their GitHub Username?"}
+        ]);
+    }
+    else if ("Intern") {
+        inquirer.prompt([
+            {type: "input", name: "school", message: "What is their School's name?"}
+        ]);
+    }
 }
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
