@@ -2,28 +2,36 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
-const path = require("path");
-const fs = require("fs");
+// const path = require("path");
+// const fs = require("fs");
+const employees = []
 ​
-const OUTPUT_DIR = path.resolve(__dirname, "output")
-const outputPath = path.join(OUTPUT_DIR, "team.html");
-​
-const render = require("./lib/htmlRenderer");
+// const OUTPUT_DIR = path.resolve(__dirname, "output")
+// const outputPath = path.join(OUTPUT_DIR, "team.html");
+// ​
+// const render = require("./lib/htmlRenderer");
 ​
 ​
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-​employeeDirectory => {
+function employeeDirectory() {
     inquirer.prompt([
         {type: "input", name: "name", message: "What is the Employee's name?"},
         {type: "input", name: "id", message: "Please enter their Employee ID."},
         {type: "input", name: "email", meassage: "Please enter the Employee's E-Mail."},
         {type: "list", name: "role", message: "What role does the Employee have?", choices: ["Engineer", "Manager", "Intern"]}
-    ]);
+    ])
     if ("Manager") {
         inquirer.prompt([
             {type: "input", name: "officeNumber", message: "What is their Office Number?"}
-        ]);
+        ])
+        .then (managerRes => {
+            let managerNew = new Manager(managerRes.name, managerRes.id, managerRes.email, managerRes.role, managerRes.officeNumber);
+            console.log(managerNew);
+            employeeDirec.push(managerNew);
+            console.log(employees);
+            newEntry();
+        })
     }
     else if ("Engineer") {
         inquirer.prompt([
@@ -34,6 +42,18 @@ const render = require("./lib/htmlRenderer");
         inquirer.prompt([
             {type: "input", name: "school", message: "What is their School's name?"}
         ]);
+    }
+}
+
+function newEntry() {
+    inquirer.prompt([
+        {type: "list", name: "new", message: "Do you wish to add a new Employee?", choices: ["Yes, I would.", "No, Thank you. I am done."]}
+    ])
+    if ("Yes, I would.") {
+        employeeDirectory();
+    } 
+    else if ("No, Thank you. I am done.") {
+        console.log("Thank you!");
     }
 }
 // After the user has input all employees desired, call the `render` function (required
@@ -55,3 +75,4 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an 
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work!```
+employeeDirectory();
