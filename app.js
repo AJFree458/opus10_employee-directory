@@ -17,12 +17,24 @@ const render = require("./lib/htmlRenderer");
 
 function employeeRole() {
     inquirer.prompt([
+        { type: "input", name: "name", message: "What is the Employee's name?" },
+        { type: "input", name: "id", message: "Please enter their Employee ID." },
+        { type: "input", name: "email", meassage: "Please enter the Employee's E-Mail." },
         { type: "list", name: "role", message: "What is the Employee's role?", choices: ["Manager", "Engineer", "Intern"] }
     ]).then(res => {
         console.log(res);
+        let data = res;
     switch (res.role){
         case "Manager":
-            managerQuery(res.role);
+            inquirer.prompt([
+                {type: "input", name: "officeNumber", message: "What is their Office Number?"}
+            ]).then(managerRes => {
+                let managerEntry = new Manager(data.name, data.id, data.email, managerRes.officeNumber);
+                console.log(managerEntry);
+                employees.push(managerEntry);
+                console.log(employees);
+                newEntry();
+            });
         break;
         case "Engineer":
             engineerQuery(res.role);
@@ -34,20 +46,20 @@ function employeeRole() {
     })
 }
 
-function managerQuery() {
-    inquirer.prompt([
-        { type: "input", name: "name", message: "What is the Employee's name?" },
-        { type: "input", name: "id", message: "Please enter their Employee ID." },
-        { type: "input", name: "email", meassage: "Please enter the Employee's E-Mail." },
-        {type: "input", name: "officeNumber", message: "What is their Office Number?"}
-    ]).then(managerRes => {
-        let managerEntry = new Manager(managerRes.name, managerRes.id, managerRes.email, managerRes.officeNumber);
-        console.log(managerEntry);
-        employees.push(managerEntry);
-        console.log(employees);
-        // newEntry();
-    })
-}
+// function managerQuery() {
+//     inquirer.prompt([
+//         { type: "input", name: "name", message: "What is the Employee's name?" },
+//         { type: "input", name: "id", message: "Please enter their Employee ID." },
+//         { type: "input", name: "email", meassage: "Please enter the Employee's E-Mail." },
+//         {type: "input", name: "officeNumber", message: "What is their Office Number?"}
+//     ]).then(managerRes => {
+//         let managerEntry = new Manager(managerRes.name, managerRes.id, managerRes.email, managerRes.officeNumber);
+//         console.log(managerEntry);
+//         employees.push(managerEntry);
+//         console.log(employees);
+//         // newEntry();
+//     })
+// }
 
 function engineerQuery() {
     inquirer.prompt([
@@ -82,13 +94,17 @@ function internQuery() {
 function newEntry() {
     inquirer.prompt([
         { type: "list", name: "new", message: "Do you wish to add a new Employee?", choices: ["Yes, I would.", "No, Thank you. I am done."] }
-    ])
-    if ("Yes, I would.") {
-        employeeRole();
-    }
-    else if ("No, Thank you. I am done.") {
-        console.log("Thank you!");
-    }
+    ]).then(res => {
+        if ("Yes, I would.") {
+            employeeRole();
+        }
+        else if ("No, Thank you. I am done.") {
+            console.log("Finished!");
+            return "Finished!"
+        }
+
+    })
+    
 }
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
