@@ -24,7 +24,7 @@ function employeeDirectory() {
     ])
     .then(response => {
         console.log(response);
-        const newEmployee = response;
+        let newEmployee = response;
         console.log(newEmployee);
         return newEmployee;
     })
