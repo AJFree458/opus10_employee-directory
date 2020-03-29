@@ -22,7 +22,7 @@ function employeeRole() {
         { type: "input", name: "email", meassage: "Please enter the Employee's E-Mail." },
         { type: "list", name: "role", message: "What is the Employee's role?", choices: ["Manager", "Engineer", "Intern"] }
     ]).then(res => {
-        console.log(res);
+        // console.log(res);
         let data = res;
     switch (res.role){
         case "Manager":
@@ -30,9 +30,9 @@ function employeeRole() {
                 {type: "input", name: "officeNumber", message: "What is their Office Number?"}
             ]).then(managerRes => {
                 let managerEntry = new Manager(data.name, data.id, data.email, managerRes.officeNumber);
-                console.log(managerEntry);
+                // console.log(managerEntry);
                 employees.push(managerEntry);
-                console.log(employees);
+                // console.log(employees);
                 newEntry();
             });
         break;
@@ -41,9 +41,9 @@ function employeeRole() {
                 {type: "input", name: "giHubUsername", message: "What is their GitHub Username?"}
             ]).then(engineerRes => {
                 let engineerEntry = new Engineer(data.name, data.id, data.email, engineerRes.giHubUsername);
-                console.log(engineerEntry);
+                // console.log(engineerEntry);
                 employees.push(engineerEntry);
-                console.log(employees);
+                // console.log(employees);
                 newEntry();
             });
         break;
@@ -52,29 +52,28 @@ function employeeRole() {
                 {type: "input", name: "school", message: "What School do they attend?"}
             ]).then(internRes => {
                 let internEntry = new Intern(data.name, data.id, data.email, internRes.school);
-                console.log(internEntry);
+                // console.log(internEntry);
                 employees.push(internEntry);
-                console.log(employees);
+                // console.log(employees);
                 newEntry();
             });
         break;
     }
     })
 }
-
+// Check if there needs to be a new entry
 function newEntry() {
     inquirer.prompt([
         { type: "list", name: "new", message: "Do you wish to add a new Employee?", choices: ["Yes, I would.", "No, Thank you. I am done."] }
     ]).then(res => {
-        console.log(res);
-        let newEntryAnswer = res;
+        // console.log(res);
     switch (res.new) {
         case "Yes, I would.":
             employeeRole();
         break;
         case "No, Thank you. I am done.":
             console.log("Finished!");
-            directoryMaker(employees);
+            makerHTML(employees);
         break;
     }
     })
@@ -84,25 +83,25 @@ function newEntry() {
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
 
-function directoryMaker() {
-    console.log(employees);
-    if(!fs.existsSync(OUTPUT_DIR)){
+function makerHTML() {
+    const makeHTML = render(employees);
+    // console.log(makeHTML);
+    // Check if there is a Directory
+    if (!fs.existsSync(OUTPUT_DIR)) {
         //creat Directory
-        const makeHTML = render(employees);
-        createFile(makeHTML);    
-        console.log("the directory exists")
+        fs.mkdirSync(OUTPUT_DIR);
+        console.log("The directory now exists");
+        // Write to file 
+        fs.writeFile(outputPath, makeHTML, function(err){
+            if (err) throw err;
+        }) 
     } else {
-        const makeHTML = render(employees);
-        createFile(makeHTML); 
-    };
-    
+        fs.writeFile(outputPath, makeHTML, function(err){
+            if (err) throw err;
+        })
+    }
 }
 
-function createFile() {
-    fs.writeFile(outputPath, employees, function(err){
-        if (err) throw err; 
-    })
-}
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
