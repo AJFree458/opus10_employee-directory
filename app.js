@@ -62,51 +62,6 @@ function employeeRole() {
     })
 }
 
-// function managerQuery() {
-//     inquirer.prompt([
-//         { type: "input", name: "name", message: "What is the Employee's name?" },
-//         { type: "input", name: "id", message: "Please enter their Employee ID." },
-//         { type: "input", name: "email", meassage: "Please enter the Employee's E-Mail." },
-//         {type: "input", name: "officeNumber", message: "What is their Office Number?"}
-//     ]).then(managerRes => {
-//         let managerEntry = new Manager(managerRes.name, managerRes.id, managerRes.email, managerRes.officeNumber);
-//         console.log(managerEntry);
-//         employees.push(managerEntry);
-//         console.log(employees);
-//         // newEntry();
-//     })
-// }
-
-// function engineerQuery() {
-//     inquirer.prompt([
-//         { type: "input", name: "name", message: "What is the Employee's name?" },
-//         { type: "input", name: "id", message: "Please enter their Employee ID." },
-//         { type: "input", name: "email", meassage: "Please enter the Employee's E-Mail." },
-//         {type: "input", name: "giHubUsername", message: "What is their GitHub Username?"}
-//     ]).then(engineerRes => {
-//         let engineerEntry = new Engineer(engineerRes.name, engineerRes.id, engineerRes.email, engineerRes.giHubUsername);
-//         console.log(engineerEntry);
-//         employees.push(engineerEntry);
-//         console.log(employees);
-//         // newEntry();
-//     })
-// }
-
-// function internQuery() {
-//     inquirer.prompt([
-//         { type: "input", name: "name", message: "What is the Employee's name?" },
-//         { type: "input", name: "id", message: "Please enter their Employee ID." },
-//         { type: "input", name: "email", meassage: "Please enter the Employee's E-Mail." },
-//         {type: "input", name: "school", message: "What School do they attend?"}
-//     ]).then(internRes => {
-//         let internEntry = new Intern(internRes.name, internRes.id, internRes.email, internRes.school);
-//         console.log(internEntry);
-//         employees.push(internEntry);
-//         console.log(employees);
-//         // newEntry();
-//     })
-// }
-
 function newEntry() {
     inquirer.prompt([
         { type: "list", name: "new", message: "Do you wish to add a new Employee?", choices: ["Yes, I would.", "No, Thank you. I am done."] }
@@ -119,7 +74,7 @@ function newEntry() {
         break;
         case "No, Thank you. I am done.":
             console.log("Finished!");
-            directoryMaker();
+            directoryMaker(employees);
         break;
     }
     })
@@ -130,10 +85,24 @@ function newEntry() {
 // generate and return a block of HTML including templated divs for each employee!
 
 function directoryMaker() {
-    let employeeArray = JSON.stringify(employees);
-    console.log(employeeArray);
+    console.log(employees);
+    if(!fs.existsSync(OUTPUT_DIR)){
+        //creat Directory
+        const makeHTML = render(employees);
+        createFile(makeHTML);    
+        console.log("the directory exists")
+    } else {
+        const makeHTML = render(employees);
+        createFile(makeHTML); 
+    };
+    
 }
 
+function createFile(employees) {
+    fs.writeFile(outputPath, employees, function(err){
+        if (err) throw err; 
+    })
+}
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
@@ -150,30 +119,3 @@ function directoryMaker() {
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work!```
 employeeRole();
-
-// { type: "input", name: "name", message: "What is the Employee's name?" },
-//         { type: "input", name: "id", message: "Please enter their Employee ID." },
-//         { type: "input", name: "email", meassage: "Please enter the Employee's E-Mail." },
-
-// if ("Manager") {
-    //     inquirer.prompt([
-    //         {type: "input", name: "officeNumber", message: "What is their Office Number?"}
-    //     ])
-    //     .then (managerRes => {
-    //         let managerNew = new Manager(managerRes.name, managerRes.id, managerRes.email, managerRes.role, managerRes.officeNumber);
-    //         console.log(managerNew);
-    //         employeeDirec.push(managerNew);
-    //         console.log(employees);
-    //         newEntry();
-    //     })
-    // }
-    // else if ("Engineer") {
-    //     inquirer.prompt([
-    //         {type: "input", name: "gitHubUsername", message: "What is their GitHub Username?"}
-    //     ]);
-    // }
-    // else if ("Intern") {
-    //     inquirer.prompt([
-    //         {type: "input", name: "school", message: "What is their School's name?"}
-    //     ]);
-    // }
