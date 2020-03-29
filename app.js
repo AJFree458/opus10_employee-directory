@@ -98,7 +98,7 @@ function directoryMaker() {
     
 }
 
-function createFile(employees) {
+function createFile() {
     fs.writeFile(outputPath, employees, function(err){
         if (err) throw err; 
     })
