@@ -10,7 +10,7 @@ This is a command-line application to generate an HTML document for a software e
 
 * [Installation](#installation)
 
-* [Deployment](#deployment)
+* [Repository](#repository)
 
 * [Usage](#usage)
 
@@ -30,7 +30,7 @@ To install necessary dependencies, run the following command:
 npm i
 ```
 
-## Deployment
+## Repository
 
 This project's repository is at: [opus10_employee-directory](https://github.com/AJFree458/opus10_employee-directory)
 
