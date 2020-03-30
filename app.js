@@ -16,15 +16,19 @@ const render = require("./lib/htmlRenderer");
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 function employeeRole() {
+    // Ask the Questions that all employee roles have in common
     inquirer.prompt([
         { type: "input", name: "name", message: "What is the Employee's name?" },
         { type: "input", name: "id", message: "Please enter their Employee ID." },
         { type: "input", name: "email", meassage: "Please enter the Employee's E-Mail." },
+        // Ask what the role is and split off from there
         { type: "list", name: "role", message: "What is the Employee's role?", choices: ["Manager", "Engineer", "Intern"] }
     ]).then(res => {
         // console.log(res);
+        // Make sure that the responses can be used later on
         let data = res;
     switch (res.role){
+        // For each role, ask the role specific question, then send the responses as an object to the employee array. Send to a different function to continue
         case "Manager":
             inquirer.prompt([
                 {type: "input", name: "officeNumber", message: "What is their Office Number?"}
@@ -68,9 +72,11 @@ function newEntry() {
     ]).then(res => {
         // console.log(res);
     switch (res.new) {
+        // If there is a another employee entry, send back to the previous function
         case "Yes, I would.":
             employeeRole();
         break;
+        // If the employee entry is done, send to the write file
         case "No, Thank you. I am done.":
             console.log("Finished!");
             makerHTML(employees);
@@ -79,10 +85,8 @@ function newEntry() {
     })
     
 }
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
 
+// Render the employees using a provided function, then write to a file
 function makerHTML() {
     const makeHTML = render(employees);
     // console.log(makeHTML);
@@ -91,16 +95,23 @@ function makerHTML() {
         //creat Directory
         fs.mkdirSync(OUTPUT_DIR);
         console.log("The directory now exists");
-        // Write to file 
+        // Write to file, but throw an error if needed
         fs.writeFile(outputPath, makeHTML, function(err){
             if (err) throw err;
         }) 
+    // Write to file directly if there is already a directory, and throw an error if needed
     } else {
         fs.writeFile(outputPath, makeHTML, function(err){
             if (err) throw err;
         })
     }
 }
+
+employeeRole();
+
+// After the user has input all employees desired, call the `render` function (required
+// above) and pass in an array containing all employee objects; the `render` function will
+// generate and return a block of HTML including templated divs for each employee!
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
@@ -117,4 +128,3 @@ function makerHTML() {
 // for further information. Be sure to test out each class and verify it generates an 
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work!```
-employeeRole();
