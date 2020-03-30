@@ -36,15 +36,21 @@ This project's repository is at: [opus10_employee-directory](https://github.com/
 
 ## Usage
 
-
-
 First, cd to the directory that the application is in. Install dependencies, if needed, then run with:
 
 ```
-node index.js
+node app.js
 ```
 
 After you have run the command, follow the instructions on the command-line.
+
+Here is an example of the command-line with some data:
+
+![CLI Data](./img/Command-line_demo.png)
+
+This is the generated HTML from the command-line:
+
+![HTML Demo](./img/HTML_Demo.png)
 
 ## License
 
