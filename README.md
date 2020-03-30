@@ -1,10 +1,10 @@
 # opus10_employee-directory
 
-![GitHub All Releases](https://img.shields.io/github/languages/top/AJFree458/opus10_employee-directory)
+![GitHub All Releases](https://img.shields.io/github/languages/top/AJFree458/opus10_employee-directory) ![GitHub language count](https://img.shields.io/github/languages/count/AJFree458/opus10_employee-directory) ![GitHub repo size](https://img.shields.io/github/repo-size/AJFree458/opus10_employee-directory)
 
 ## Description
 
-
+This is a command-line application to generate an HTML document for a software engineering team. 
 
 ## Table of Content
 
@@ -48,7 +48,7 @@ After you have run the command, follow the instructions on the command-line.
 
 ## License
 
-[![GitHub license](https://img.shields.io/static/v1?label=License&message=None&color=blue)](https://github.com/AJFree458/opus10_employee-directory)
+[![GitHub license](https://img.shields.io/static/v1?label=License&message=None&color=blue)](https://github.com/AJFree458/opus10_employee-directory) ![GitHub](https://img.shields.io/github/license/AJFree458/opus10_employee-directory)
 
 This project is licensed under the None license.
 
