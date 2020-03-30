@@ -20,7 +20,7 @@ function employeeRole() {
     inquirer.prompt([
         { type: "input", name: "name", message: "What is the Employee's name?" },
         { type: "input", name: "id", message: "Please enter their Employee ID." },
-        { type: "input", name: "email", meassage: "Please enter the Employee's E-Mail." },
+        { type: "input", name: "email", message: "Please enter the Employee's E-Mail." },
         // Ask what the role is and split off from there
         { type: "list", name: "role", message: "What is the Employee's role?", choices: ["Manager", "Engineer", "Intern"] }
     ]).then(res => {
