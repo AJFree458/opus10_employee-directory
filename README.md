@@ -4,7 +4,11 @@
 
 ## Description
 
-This is a command-line application to generate an HTML document for a software engineering team. 
+This is a command-line application to generate an HTML document for a software engineering team. The user can input as many employees as needed using the command-line, and when finished, the program generates an HTML file, or writes over a previous one. 
+
+The idea behind this project is that this application is to provide a simple way to input employee information and then display it. This will allow for easy access to team member e-mails and GitHub profiles.  
+
+Each Employee role has their own specific sub-class, and there are tests provided for them.
 
 ## Table of Content
 
@@ -24,11 +28,8 @@ This is a command-line application to generate an HTML document for a software e
 
 ## Installation
 
-To install necessary dependencies, run the following command:
+There are several package dependencies for this appliction. They are [inquirer](https://www.npmjs.com/package/inquirer), for the input, and [jest](https://jestjs.io/) to run the tests. It is suggested that the user run `npm install` before running the application, to ensure that the dependencies are up to date.
 
-```
-npm i
-```
 
 ## Repository
 
@@ -71,7 +72,7 @@ Main Contributor: Arthur Freeman
 To run tests, run the following command:
 
 ```
-
+npm run test
 ```
 
 ## Questions
