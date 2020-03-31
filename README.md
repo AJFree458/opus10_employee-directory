@@ -47,17 +47,17 @@ After you have run the command, follow the instructions on the command-line.
 
 Here is an example of the command-line with some data:
 
-![CLI Data](./img/Command-line_demo.png)
+![CLI Data](./img/Input_Demo.png)
 
 This is the generated HTML from the command-line:
 
-![HTML Demo](./img/HTML_Demo.png)
+![HTML Demo](./img/HTML_demo.png)
 
 ## License
 
-[![GitHub license](https://img.shields.io/static/v1?label=License&message=None&color=blue)](https://github.com/AJFree458/opus10_employee-directory) ![GitHub](https://img.shields.io/github/license/AJFree458/opus10_employee-directory)
+![GitHub](https://img.shields.io/github/license/AJFree458/opus10_employee-directory)
 
-This project is licensed under the None license.
+This project currently does not have a license.
 
 ## Contributing
 
