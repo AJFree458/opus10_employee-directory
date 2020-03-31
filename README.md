@@ -53,6 +53,8 @@ This is the generated HTML from the command-line:
 
 ![HTML Demo](./img/HTML_demo.png)
 
+![App Demo](./img/App-Demo.gif)
+
 ## License
 
 ![GitHub](https://img.shields.io/github/license/AJFree458/opus10_employee-directory)
